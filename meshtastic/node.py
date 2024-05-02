@@ -39,6 +39,8 @@ class Node:
         self.cannedPluginMessageMessages = None
         self.ringtone = None
         self.ringtonePart = None
+        self.autoresponderMessage = None
+        self.autoresponderPermittedNodes = None
 
         self.gotResponse = None
 
@@ -202,6 +204,8 @@ class Node:
             p.set_module_config.ambient_lighting.CopyFrom(self.moduleConfig.ambient_lighting)
         elif config_name == "paxcounter":
             p.set_module_config.paxcounter.CopyFrom(self.moduleConfig.paxcounter)
+        elif config_name == "autoresponder":
+            p.set_module_config.autoresponder.CopyFrom(self.moduleConfig.autoresponder)
         else:
             our_exit(f"Error: No valid config with name {config_name}")
 
@@ -514,6 +518,116 @@ class Node:
             else:
                 onResponse = self.onAckNak
             return self._sendAdmin(p, onResponse=onResponse)
+
+    def onResponseRequestAutoresponderMessage(self, p):
+        """Handle the response packet for requesting autoresponder message"""
+        logging.debug(f"onResponseRequestAutoresponderMessage() p:{p}")
+        errorFound = False
+        if "routing" in p["decoded"]:
+            if p["decoded"]["routing"]["errorReason"] != "NONE":
+                errorFound = True
+                print(f'Error on response: {p["decoded"]["routing"]["errorReason"]}')
+        if errorFound is False:
+            if "decoded" in p:
+                if "admin" in p["decoded"]:
+                    if "raw" in p["decoded"]["admin"]:
+                        self.autoresponderMessage = p["decoded"]["admin"][
+                            "raw"
+                        ].get_autoresponder_message_response
+                        logging.debug(f"self.autoresponderMessage:{self.autoresponderMessage}")
+                        self.gotResponse = True
+
+    def get_autoresponder_message(self):
+        """Get the autoresponder message string."""
+        logging.debug(f"in get_autoresponder_message()")
+        if not self.autoresponderMessage:
+            p1 = admin_pb2.AdminMessage()
+            p1.get_autoresponder_message_request = True
+            self.gotResponse = False
+            self._sendAdmin(
+                p1,
+                wantResponse=True,
+                onResponse=self.onResponseRequestAutoresponderMessage,
+            )
+            while self.gotResponse is False:
+                time.sleep(0.1)
+
+        print(f"autoresponder_message: {self.autoresponderMessage}")
+        return self.autoresponderMessage
+
+    def set_autoresponder_message(self, message):
+        """Set the autoresponder message. The length must be less than 200 characters."""
+
+        if len(message) > 200:
+            our_exit("Warning: The message must be less than 200 characters.")
+
+        p = admin_pb2.AdminMessage()
+        p.set_autoresponder_message = message
+
+        logging.debug(f"Setting autoresponder message: '{message}'")
+        # If sending to a remote node, wait for ACK/NAK
+        if self == self.iface.localNode:
+            onResponse = None
+        else:
+            onResponse = self.onAckNak
+
+        time.sleep(1)
+        return self._sendAdmin(p, onResponse=onResponse)
+
+    def onResponseRequestAutoresponderPermittedNodes(self, p):
+        """Handle the response packet for requesting autoresponder permitted node list"""
+        logging.debug(f"onResponseRequestAutoresponderPermittedNodes() p:{p}")
+        errorFound = False
+        if "routing" in p["decoded"]:
+            if p["decoded"]["routing"]["errorReason"] != "NONE":
+                errorFound = True
+                print(f'Error on response: {p["decoded"]["routing"]["errorReason"]}')
+        if errorFound is False:
+            if "decoded" in p:
+                if "admin" in p["decoded"]:
+                    if "raw" in p["decoded"]["admin"]:
+                        self.autoresponderPermittedNodes = p["decoded"]["admin"][
+                            "raw"
+                        ].get_autoresponder_permittednodes_response
+                        logging.debug(f"self.autoresponderMessage:{self.autoresponderPermittedNodes}")
+                        self.gotResponse = True
+
+    def get_autoresponder_permitted_nodes(self):
+        """Get the autoresponder list of nodes, to which the autoresponder will reply."""
+        logging.debug(f"in get_autoresponder_permitted_nodes()")
+        if not self.autoresponderPermittedNodes:
+            p1 = admin_pb2.AdminMessage()
+            p1.get_autoresponder_permittednodes_request = True
+            self.gotResponse = False
+            self._sendAdmin(
+                p1,
+                wantResponse=True,
+                onResponse=self.onResponseRequestAutoresponderPermittedNodes,
+            )
+            while self.gotResponse is False:
+                time.sleep(0.1)
+
+        print(f"autoresponder_permittednodes: {self.autoresponderPermittedNodes}")
+        return self.autoresponderMessage
+        
+    def set_autoresponder_permitted_nodes(self, nodelist):
+        """Set the list of permitted node IDs for the autoresponder."""
+
+        if len(nodelist) > 200:
+            our_exit("Warning: The list must be less than 200 characters.")
+
+        p = admin_pb2.AdminMessage()
+        p.set_autoresponder_permittednodes = nodelist
+
+        logging.debug(f"Setting permitted nodes: '{nodelist}'")
+        # If sending to a remote node, wait for ACK/NAK
+        if self == self.iface.localNode:
+            onResponse = None
+        else:
+            onResponse = self.onAckNak
+
+        time.sleep(1)
+        return self._sendAdmin(p, onResponse=onResponse)
 
     def exitSimulator(self):
         """Tell a simulator node to exit (this message

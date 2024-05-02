@@ -323,6 +323,24 @@ def onConnected(interface):
             print(f"Setting ringtone to {args.set_ringtone}")
             interface.getNode(args.dest, False).set_ringtone(args.set_ringtone)
 
+        # TODO: add to export-config and configure
+        if args.set_autoresponder_message:
+            closeNow = True
+            waitForAckNak = True
+            print(f"Setting autoresponder message to {args.set_autoresponder_message}")
+            interface.getNode(args.dest, False).set_autoresponder_message(
+                args.set_autoresponder_message
+            )
+
+        # TODO: add to export-config and configure
+        if args.set_autoresponder_permitted_nodes:
+            closeNow = True
+            waitForAckNak = True
+            print(f"Setting autoresponder permitted nodes list to {args.set_autoresponder_permitted_nodes}")
+            interface.getNode(args.dest, False).set_autoresponder_permitted_nodes(
+                args.set_autoresponder_permitted_nodes
+            )
+
         if args.pos_fields:
             # If --pos-fields invoked with args, set position fields
             closeNow = True
@@ -783,6 +801,16 @@ def onConnected(interface):
             print("")
             interface.getNode(args.dest).get_ringtone()
 
+        if args.get_autoresponder_message:
+            closeNow = True
+            print("")
+            interface.getNode(args.dest).get_autoresponder_message()
+
+        if args.get_autoresponder_permitted_nodes:
+            closeNow = True
+            print("")
+            interface.getNode(args.dest).get_autoresponder_permitted_nodes()
+
         if args.info:
             print("")
             # If we aren't trying to talk to our local node, don't show it
@@ -1173,6 +1201,18 @@ def initParser():
     )
 
     group.add_argument(
+        "--get-autoresponder-message",
+        help="Show the autoresponder module message",
+        action="store_true",
+    )
+
+    group.add_argument(
+        "--get-autoresponder-permitted-nodes",
+        help="Show the list of nodes, to which the autoresponder will reply",
+        action="store_true",
+    )
+
+    group.add_argument(
         "--nodes",
         help="Print Node List in a pretty formatted table",
         action="store_true",
@@ -1311,6 +1351,18 @@ def initParser():
     group.add_argument(
         "--set-ringtone",
         help="Set the Notification Ringtone (up to 230 characters).",
+        action="store",
+    )
+
+    group.add_argument(
+        "--set-autoresponder-message",
+        help="Set the autoresponder module message (up to 200 characters).",
+        action="store",
+    )
+
+    group.add_argument(
+        "--set-autoresponder-permitted-nodes",
+        help="Set which nodes the autoresponder should respond to (up to 200 characters).",
         action="store",
     )
 

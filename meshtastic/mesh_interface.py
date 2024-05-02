@@ -948,6 +948,10 @@ class MeshInterface:
                 self.localNode.moduleConfig.paxcounter.CopyFrom(
                     fromRadio.moduleConfig.paxcounter
                 )
+            elif fromRadio.moduleConfig.HasField("autoresponder"):
+                self.localNode.moduleConfig.autoresponder.CopyFrom(
+                    fromRadio.moduleConfig.autoresponder
+                )
 
         else:
             logging.debug("Unexpected FromRadio payload")
