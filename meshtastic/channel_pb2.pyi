@@ -128,7 +128,6 @@ class ModuleSettings(google.protobuf.message.Message):
 
     POSITION_PRECISION_FIELD_NUMBER: builtins.int
     IS_CLIENT_MUTED_FIELD_NUMBER: builtins.int
-    IS_CLIENT_MUTED_FIELD_NUMBER: builtins.int
     position_precision: builtins.int
     """
     Bits of precision for the location sent in position packets.
@@ -144,7 +143,7 @@ class ModuleSettings(google.protobuf.message.Message):
         position_precision: builtins.int = ...,
         is_client_muted: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["position_precision", b"position_precision"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["is_client_muted", b"is_client_muted", "position_precision", b"position_precision"]) -> None: ...
 
 global___ModuleSettings = ModuleSettings
 
