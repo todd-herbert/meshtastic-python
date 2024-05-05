@@ -224,5 +224,4 @@ protocols = {
     portnums_pb2.PortNum.STORE_FORWARD_APP: KnownProtocol("storeforward", storeforward_pb2.StoreAndForward),
     portnums_pb2.PortNum.NEIGHBORINFO_APP: KnownProtocol("neighborinfo", mesh_pb2.NeighborInfo),
     portnums_pb2.PortNum.MAP_REPORT_APP: KnownProtocol("mapreport", mqtt_pb2.MapReport),
-    portnums_pb2.PortNum.AUTORESPONDER_APP: KnownProtocol("autoresponder", autoresponder_pb2.AutoresponderConfig),
 }
