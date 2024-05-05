@@ -20,8 +20,14 @@ class AutoresponderConfig(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    BOOTCOUNT_SINCE_ENABLED_IN_CHANNEL_FIELD_NUMBER: builtins.int
     RESPONSE_TEXT_FIELD_NUMBER: builtins.int
     PERMITTED_NODES_FIELD_NUMBER: builtins.int
+    bootcount_since_enabled_in_channel: builtins.int
+    """
+    How many times has the device booted since enabled in-channel
+    Prevents a frequently rebooting node from bypassing rate limits indefinitely
+    """
     response_text: builtins.str
     """
     Predefined message, to be sent as an auto-response
@@ -35,9 +41,10 @@ class AutoresponderConfig(google.protobuf.message.Message):
     def __init__(
         self,
         *,
+        bootcount_since_enabled_in_channel: builtins.int = ...,
         response_text: builtins.str = ...,
         permitted_nodes: collections.abc.Iterable[builtins.int] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["permitted_nodes", b"permitted_nodes", "response_text", b"response_text"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["bootcount_since_enabled_in_channel", b"bootcount_since_enabled_in_channel", "permitted_nodes", b"permitted_nodes", "response_text", b"response_text"]) -> None: ...
 
 global___AutoresponderConfig = AutoresponderConfig

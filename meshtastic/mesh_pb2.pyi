@@ -113,6 +113,10 @@ class _HardwareModelEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     """
     LoRAType device: https://loratype.org/
     """
+    WIPHONE: _HardwareModel.ValueType  # 20
+    """
+    wiphone https://www.wiphone.io/
+    """
     STATION_G1: _HardwareModel.ValueType  # 25
     """
     B&Q Consulting Station Edition G1: https://uniteng.com/wiki/doku.php?id=meshtastic:station
@@ -373,6 +377,10 @@ B&Q Consulting Nano G2 Ultra: https://wiki.uniteng.com/en/meshtastic/nano-g2-ult
 LORA_TYPE: HardwareModel.ValueType  # 19
 """
 LoRAType device: https://loratype.org/
+"""
+WIPHONE: HardwareModel.ValueType  # 20
+"""
+wiphone https://www.wiphone.io/
 """
 STATION_G1: HardwareModel.ValueType  # 25
 """

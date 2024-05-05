@@ -1049,6 +1049,7 @@ class ModuleConfig(google.protobuf.message.Message):
 
         ENABLED_DM_FIELD_NUMBER: builtins.int
         ENABLED_IN_CHANNEL_FIELD_NUMBER: builtins.int
+        REPEAT_HOURS_FIELD_NUMBER: builtins.int
         enabled_dm: builtins.bool
         """
         Sets whether the module responds to DMs
@@ -1057,13 +1058,18 @@ class ModuleConfig(google.protobuf.message.Message):
         """
         Sets whether the module responds to messages in channel
         """
+        repeat_hours: builtins.int
+        """
+        How long will Autoresponder wait before responding again to the same node
+        """
         def __init__(
             self,
             *,
             enabled_dm: builtins.bool = ...,
             enabled_in_channel: builtins.bool = ...,
+            repeat_hours: builtins.int = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["enabled_dm", b"enabled_dm", "enabled_in_channel", b"enabled_in_channel"]) -> None: ...
+        def ClearField(self, field_name: typing.Literal["enabled_dm", b"enabled_dm", "enabled_in_channel", b"enabled_in_channel", "repeat_hours", b"repeat_hours"]) -> None: ...
 
     MQTT_FIELD_NUMBER: builtins.int
     SERIAL_FIELD_NUMBER: builtins.int

@@ -171,10 +171,6 @@ class _PortNumEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTy
     """
     Provides unencrypted information about a node for consumption by a map via MQTT
     """
-    AUTORESPONDER_APP: _PortNum.ValueType  # 74
-    """
-    Responds with a user-defined message, on selected channels
-    """
     PRIVATE_APP: _PortNum.ValueType  # 256
     """
     Private applications should use portnums >= 256.
@@ -355,10 +351,6 @@ Portnum for payloads from the official Meshtastic ATAK plugin
 MAP_REPORT_APP: PortNum.ValueType  # 73
 """
 Provides unencrypted information about a node for consumption by a map via MQTT
-"""
-AUTORESPONDER_APP: PortNum.ValueType  # 74
-"""
-Responds with a user-defined message, on selected channels
 """
 PRIVATE_APP: PortNum.ValueType  # 256
 """
