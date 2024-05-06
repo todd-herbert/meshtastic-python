@@ -281,6 +281,11 @@ class _HardwareModelEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     TWC_MESH_V4 
     Adafruit NRF52840 feather express with SX1262, SSD1306 OLED and NEO6M GPS
     """
+    NRF52_PROMICRO_DIY: _HardwareModel.ValueType  # 63
+    """
+    NRF52_PROMICRO_DIY
+    Promicro NRF52840 with SX1262/LLCC68, SSD1306 OLED and NEO6M GPS
+    """
     PRIVATE_HW: _HardwareModel.ValueType  # 255
     """
     ------------------------------------------------------------------------------------------------------------------------------------------
@@ -545,6 +550,11 @@ TWC_MESH_V4: HardwareModel.ValueType  # 62
 """
 TWC_MESH_V4 
 Adafruit NRF52840 feather express with SX1262, SSD1306 OLED and NEO6M GPS
+"""
+NRF52_PROMICRO_DIY: HardwareModel.ValueType  # 63
+"""
+NRF52_PROMICRO_DIY
+Promicro NRF52840 with SX1262/LLCC68, SSD1306 OLED and NEO6M GPS
 """
 PRIVATE_HW: HardwareModel.ValueType  # 255
 """
