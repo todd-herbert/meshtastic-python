@@ -1050,6 +1050,8 @@ class ModuleConfig(google.protobuf.message.Message):
         ENABLED_DM_FIELD_NUMBER: builtins.int
         ENABLED_IN_CHANNEL_FIELD_NUMBER: builtins.int
         REPEAT_HOURS_FIELD_NUMBER: builtins.int
+        EXPIRATION_HOURS_FIELD_NUMBER: builtins.int
+        SHOULD_DM_EXPIRE_FIELD_NUMBER: builtins.int
         enabled_dm: builtins.bool
         """
         Sets whether the module responds to DMs
@@ -1062,14 +1064,26 @@ class ModuleConfig(google.protobuf.message.Message):
         """
         How long will Autoresponder wait before responding again to the same node
         """
+        expiration_hours: builtins.int
+        """
+        How long until the Autoresponder is automatically disabled
+        Mandatory for in-channel responses, with hard-coded maximum
+        Optional for DM responses, no enforced maximum
+        """
+        should_dm_expire: builtins.bool
+        """
+        Should expiration_hours also apply to DM responses?
+        """
         def __init__(
             self,
             *,
             enabled_dm: builtins.bool = ...,
             enabled_in_channel: builtins.bool = ...,
             repeat_hours: builtins.int = ...,
+            expiration_hours: builtins.int = ...,
+            should_dm_expire: builtins.bool = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["enabled_dm", b"enabled_dm", "enabled_in_channel", b"enabled_in_channel", "repeat_hours", b"repeat_hours"]) -> None: ...
+        def ClearField(self, field_name: typing.Literal["enabled_dm", b"enabled_dm", "enabled_in_channel", b"enabled_in_channel", "expiration_hours", b"expiration_hours", "repeat_hours", b"repeat_hours", "should_dm_expire", b"should_dm_expire"]) -> None: ...
 
     MQTT_FIELD_NUMBER: builtins.int
     SERIAL_FIELD_NUMBER: builtins.int
