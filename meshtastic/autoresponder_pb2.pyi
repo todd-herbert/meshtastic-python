@@ -20,13 +20,15 @@ class AutoresponderConfig(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    BOOTCOUNT_SINCE_ENABLED_IN_CHANNEL_FIELD_NUMBER: builtins.int
+    BOOTCOUNT_SINCE_ENABLED_FIELD_NUMBER: builtins.int
     RESPONSE_TEXT_FIELD_NUMBER: builtins.int
     PERMITTED_NODES_FIELD_NUMBER: builtins.int
-    bootcount_since_enabled_in_channel: builtins.int
+    bootcount_since_enabled: builtins.int
     """
-    How many times has the device booted since enabled in-channel
+    How many times the device has booted since module enabled
     Prevents a frequently rebooting node from bypassing rate limits indefinitely
+    Always applies to in-channel responses, optionally applies to DMs
+    Doesn't count when this protection is not needed
     """
     response_text: builtins.str
     """
@@ -41,10 +43,10 @@ class AutoresponderConfig(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        bootcount_since_enabled_in_channel: builtins.int = ...,
+        bootcount_since_enabled: builtins.int = ...,
         response_text: builtins.str = ...,
         permitted_nodes: collections.abc.Iterable[builtins.int] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["bootcount_since_enabled_in_channel", b"bootcount_since_enabled_in_channel", "permitted_nodes", b"permitted_nodes", "response_text", b"response_text"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["bootcount_since_enabled", b"bootcount_since_enabled", "permitted_nodes", b"permitted_nodes", "response_text", b"response_text"]) -> None: ...
 
 global___AutoresponderConfig = AutoresponderConfig
