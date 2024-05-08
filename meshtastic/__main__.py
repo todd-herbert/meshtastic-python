@@ -888,6 +888,9 @@ def onConnected(interface):
 
         # if the user didn't ask for serial debugging output, we might want to exit after we've done our operation
         if (not args.seriallog) and closeNow:
+            if args.slow_disconnect:
+                print(f"Pausing {args.slow_disconnect} seconds before disconnect" )
+                time.sleep(int(args.slow_disconnect))
             interface.close()  # after running command then exit
 
     except Exception as ex:
@@ -1520,6 +1523,12 @@ def initParser():
         "--ble-scan",
         help="Scan for Meshtastic BLE devices",
         action="store_true",
+    )
+
+    group.add_argument(
+        "--slow-disconnect",
+        help="How many seconds to pause before ending serial connection",
+        action="store",
     )
 
     group.add_argument(
