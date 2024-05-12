@@ -4,6 +4,8 @@ import logging
 import platform
 import time
 
+from typing import Optional
+
 import serial # type: ignore[import-untyped]
 
 import meshtastic.util
@@ -16,7 +18,7 @@ if platform.system() != "Windows":
 class SerialInterface(StreamInterface):
     """Interface class for meshtastic devices over a serial link"""
 
-    def __init__(self, devPath=None, debugOut=None, noProto=False, connectNow=True):
+    def __init__(self, devPath: Optional[str]=None, debugOut=None, noProto=False, connectNow=True):
         """Constructor, opens a connection to a specified serial port, or if unspecified try to
         find one Meshtastic device by probing
 
@@ -26,7 +28,7 @@ class SerialInterface(StreamInterface):
         """
         self.noProto = noProto
 
-        self.devPath = devPath
+        self.devPath: Optional[str] = devPath
 
         if self.devPath is None:
             ports = meshtastic.util.findPorts(True)

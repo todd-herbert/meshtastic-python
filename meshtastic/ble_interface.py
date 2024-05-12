@@ -5,6 +5,8 @@ import time
 import struct
 import asyncio
 from threading import Thread, Event
+from typing import Optional
+
 from bleak import BleakScanner, BleakClient
 
 from meshtastic.mesh_interface import MeshInterface
@@ -30,7 +32,7 @@ class BLEInterface(MeshInterface):
         MESH = False
 
 
-    def __init__(self, address, noProto = False, debugOut = None):
+    def __init__(self, address: Optional[str], noProto: bool = False, debugOut = None):
         self.state = BLEInterface.BLEState()
 
         if not address:
