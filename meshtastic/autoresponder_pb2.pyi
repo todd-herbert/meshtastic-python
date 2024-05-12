@@ -29,6 +29,7 @@ class AutoresponderConfig(google.protobuf.message.Message):
     Prevents a frequently rebooting node from bypassing rate limits indefinitely
     Always applies to in-channel responses, optionally applies to DMs
     Doesn't count when this protection is not needed
+    Int size 8
     """
     response_text: builtins.str
     """

@@ -1063,12 +1063,14 @@ class ModuleConfig(google.protobuf.message.Message):
         repeat_hours: builtins.int
         """
         How long will Autoresponder wait before responding again to the same node
+        Int size 16 bytes
         """
         expiration_hours: builtins.int
         """
         How long until the Autoresponder is automatically disabled
         Mandatory for in-channel responses, with hard-coded maximum
         Optional for DM responses, no enforced maximum
+        Int size 16 bytes
         """
         should_dm_expire: builtins.bool
         """

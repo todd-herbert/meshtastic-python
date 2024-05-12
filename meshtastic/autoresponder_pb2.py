@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1emeshtastic/autoresponder.proto\x12\nmeshtastic\"f\n\x13\x41utoresponderConfig\x12\x1f\n\x17\x62ootcount_since_enabled\x18\x01 \x01(\x07\x12\x15\n\rresponse_text\x18\x02 \x01(\t\x12\x17\n\x0fpermitted_nodes\x18\x03 \x03(\x07\x42n\n\x13\x63om.geeksville.meshB\x19\x41utoresponderConfigProtosZ\"github.com/meshtastic/go/generated\xaa\x02\x14Meshtastic.Protobufs\xba\x02\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1emeshtastic/autoresponder.proto\x12\nmeshtastic\"f\n\x13\x41utoresponderConfig\x12\x1f\n\x17\x62ootcount_since_enabled\x18\x01 \x01(\r\x12\x15\n\rresponse_text\x18\x02 \x01(\t\x12\x17\n\x0fpermitted_nodes\x18\x03 \x03(\x07\x42n\n\x13\x63om.geeksville.meshB\x19\x41utoresponderConfigProtosZ\"github.com/meshtastic/go/generated\xaa\x02\x14Meshtastic.Protobufs\xba\x02\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'meshtastic.autoresponder_pb2', globals())
