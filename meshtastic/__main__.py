@@ -364,6 +364,26 @@ def onConnected(interface):
             # Must turn off encryption on primary channel
             interface.getNode(args.dest).turnOffEncryptionOnPrimaryChannel()
 
+        if args.set_battery_chemistry:
+            chemistry = args.set_battery_chemistry
+            node = interface.getNode(args.dest)
+            value = 0
+            if chemistry == "LiIon":
+                value = config_pb2.Config.PowerConfig.BatteryChemistry.LI_ION
+            elif chemistry == "LiFePO4":
+                value = config_pb2.Config.PowerConfig.BatteryChemistry.LIFEPO4
+            elif chemistry == "LTO":
+                value = config_pb2.Config.PowerConfig.BatteryChemistry.LTO
+            elif chemistry == "NiMH":
+                value = config_pb2.Config.PowerConfig.BatteryChemistry.NIMH
+            elif chemistry == "Alkaline":
+                value = config_pb2.Config.PowerConfig.BatteryChemistry.ALKALINE
+            elif chemistry == "LeadAcid":
+                value = config_pb2.Config.PowerConfig.BatteryChemistry.LEAD_ACID
+            print(f"Using battery chemistry {chemistry}")
+            setPref(node.localConfig.power, "battery_chemistry", str(value))
+            node.writeConfig("power")
+
         if args.reboot:
             closeNow = True
             waitForAckNak = True
@@ -1327,6 +1347,13 @@ def initParser():
 
     group.add_argument(
         "--set-ham", help="Set licensed Ham ID and turn off encryption", action="store"
+    )
+
+    group.add_argument(
+        "--set-battery-chemistry", 
+        help="Set which type of battery device uses.",
+        choices=['LiIon', 'LiFePO4', 'LTO', 'Alkaline', 'NiMH', 'LeadAcid'],
+        action="store",
     )
 
     group.add_argument(
